@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> hello học viên ra!</h1>
+    <!-- 
+
+        storing data in the browser
+        ( việc trữ dữ liệu trên máy tính)
+        1.localstorage
+        - lưu trữ dữ liệU dưới dạng Key(tên dữ liệu cần lưu) -Value (giá trị cần lưu);
+        - dung lượng bộ nhớ khoảng 5MB-10MB , 1 MB=1024KB 
+        - khi mình lưu trữ dữ liệu thì dữ liệu không bị mất đi.
+        cú  pháp lưu  dữ liệu
+        -để lưu thì dùng: localStorage.setItem("tenKey",GIÁ TRỊ);
+         + để lưu giá trị là array or object thì mình phải chuyển dữ liệu sang dạng JSON
+         + cú pháp chuyển : JSON.stringify(giá trị cần lưu!);
+        - lấy giá trị ra để dùng:  localStorage.getItem("")
+        - học cách xoá key trong localStorage
+         + localStorage.removeItem("truyền tên Key vào!");
+         + localStorage.clear() : xoá tất cả dữ liệu ở trong localstorage đi.
+        2.session storage
+        - cú pháp lưu trữ tương tự như đối với localstorage.
+        - khi mình đóng phiên làm việc thì dữ liệu nó sẽ bị mất đi.
+        - dung lượng session storage ít hơn thằng local 3-4MB  
+        
+        3.cookkei
+        // dùng để lưu trữ dữ liệu từ phía server
+        + dung lượng :5kb 
+        + có thể set được thời gian sống.
+        ==> lưu ý : session storage và localstorage chỉ làm việc được với client
+        không làm việc được với server
+        -cookkei thì làm việc được với server;
+     -->
+     <script>
+       /*  let listStudents=[
+            {
+            name:"hương",
+            age:25,
+        },{
+            name:"nhung",
+            age:21
+        }
+    ]
+        localStorage.setItem("listStudents",JSON.stringify(listStudents)); */
+        // let result= JSON.parse(localStorage.getItem("listStudents"))// khi lấy về vẫn ở dạng JSON
+        // // PHẢI PARSE RA DẠNG MẢNG! JSON.parse( giá trị cần parse)
+        // console.log("result",result);
+        // localStorage.removeItem("listStudents");
+        // localStorage.setItem("name1","hoa");
+        // localStorage.setItem("name1","hồng");
+        // localStorage.clear();
+        // function 1  gọi để lấy da ta : khi  nào ông có data rồi thì ông gọi cho tôi
+        // để tôi hiển thị!
+        // function 2  thực hiện việc hiển thị đa ta 
+        //  sessionStorage.setItem("name","hoa");
+        /* 
+            bài tập hôm nay:
+            quản lý sinh viên sau đó lưu trữ trên local storage
+            CRUD:
+            C: create
+            R: read
+            U: update
+            D: delete
+            dữ liệu sẽ được lưu lại không bị mất  đi.
+            B1: mình phải tạo 1 cái mảng để lưu trữ danh sách sinh viên;
+            B2: mình sẽ khởi tạo 1 đối tượng sinh viên 
+            B3: mình sẽ push nó vào mảng  danh sách sinh viên 
+            B4: đem cái mảng chứa danh sách sinh viên đi hiển thị.
+         */
+    
+        // trusthy và falsy  || || || || 
+        // falsy : null undefined NaN 0 "" '' false 
+        // && && && && ? : ?? !?
+        console.log(listStudents);
+        /* 
+            logic rất nhiều 
+        */
+      
+       
+     </script>
+</body>
+</html>

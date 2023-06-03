@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .main {
+        margin: 0 auto;
+        width: 400px;
+        border: 1px solid black;
+        height: 200px;
+    }
+
+    .main input {
+        padding: 2px;
+        outline: none;
+        margin: 8px;
+        width: 80%;
+    }
+
+    button {
+        padding: 2px;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <h2> quản lý sinh viên!</h2>
+    <div class="main">
+        <label for="nameStudent"> tên sinh viên </label> <br>
+        <input id="nameStudent" type="text" placeholder="mờI nhập tên sinh viên"> <br>
+        <label for="ageStudent"> nhập tuổi </label> <br>
+        <input id="ageStudent" type="text" placeholder="mờI nhập tuổi"> <br>
+        <label for="addressStudent"> nhập quê quán </label> <br>
+        <input id="addressStudent" type="text" placeholder="mời nhập quê quán "> <br>
+        <button onclick="addStudent()"> thêm sinh viên </button>
+
+    </div>
+    <div class="render-students">
+        <table id="renderData" border="1px" cellspacing="2px">
+            <!--  <tr>
+                <th>STT</th>
+                <th> Tên sinh viên </th>
+                <th> Tuổi </th>
+                <th> Quê Quán  </th>
+                <th colspan="2"> Action </th>
+            </tr> -->
+            <!-- <tr>
+                <td>1</td>
+                <td> Nam </td>
+                <td> 21  </td>
+                <td> HCM</td>
+                <td> edit </td>
+                <td> delete </td>
+            </tr> -->
+        </table>
+    </div>
+    <script>
+        //hàm sinh id ngẫu nhiên
+        function uuid() {
+            return new Date().getMilliseconds() + Math.floor(Math.random() * 5787535775874)
+        }
+        function addStudent() {
+            let listStudents = JSON.parse(localStorage.getItem("listStudents")) || [];
+            // lấy giá trị người dùng push vào mảng  
+            let nameStudent = document.getElementById("nameStudent").value;
+            let ageStudent = document.getElementById("ageStudent").value;
+            let addressStudent = document.getElementById("addressStudent").value;
+
+            let objStudent = {
+                name: nameStudent,
+                age: ageStudent,
+                address: addressStudent,
+                id: uuid()
+            }
+            listStudents.push(objStudent);
+            // sau khi thêm xong phải lưu lại trên local
+            localStorage.setItem("listStudents", JSON.stringify(listStudents));
+            document.getElementById("nameStudent").value = "";
+            document.getElementById("ageStudent").value = "";
+            document.getElementById("addressStudent").value = "";
+            renderListStudents();
+        }
+        // hàm render dữ liệu 
+        function renderListStudents() {
+            let listStudents = JSON.parse(localStorage.getItem("listStudents")) || [];
+            let result = "";
+            for (let i = 0; i < listStudents.length; i++) {
+                result +=
+                    `
+                          <tr>
+                            <td> ${i + 1}</td>
+                            <td> ${listStudents[i].name} </td>
+                            <td> ${listStudents[i].age}  </td>
+                            <td> ${listStudents[i].address}</td>
+                            <td> edit </td>
+                            <td onclick=deleteStudent(${listStudents[i].id})> delete </td>
+                        </tr>
+                    `
+            }
+            document.getElementById("renderData").innerHTML =
+                    `
+                <tr>
+                    <th>STT</th>
+                    <th> Tên sinh viên </th>
+                    <th> Tuổi </th>
+                    <th> Quê Quán  </th>
+                    <th colspan="2"> Action </th>
+                </tr>
+                ${result}
+            `
+        }
+        renderListStudents();
+        // function xoá sinh viên
+        function deleteStudent(idStudent) {
+             let listStudents = JSON.parse(localStorage.getItem("listStudents")) || [];
+            for (let i = 0; i < listStudents.length; i++) {
+            if(listStudents[i].id==idStudent){
+                listStudents.splice(i,1);
+                localStorage.setItem("listStudents",JSON.stringify(listStudents));
+                renderListStudents();
+            }
+            }
+        }
+    </script>
+</body>
+
+</html>
